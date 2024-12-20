@@ -4,6 +4,7 @@ namespace SpriteKind {
     export const cont = SpriteKind.create()
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
     blast = sprites.createProjectileFromSprite(assets.image`laser`, MF, 90, 0)
     blast.setFlag(SpriteFlag.DestroyOnWall, true)
 })
@@ -43,6 +44,7 @@ let MF: Sprite = null
 let blast: Sprite = null
 StartFlight()
 game.splash("Pilot the Millenium Falcon", "Collect cargo, destroy asteroids!")
+let lifeAdder = 1
 info.setLife(3)
 let rocks = [
 assets.image`rock0`,
@@ -72,5 +74,9 @@ forever(function () {
         container.setFlag(SpriteFlag.DestroyOnWall, true)
         container.setVelocity(randint(-10, -50), randint(-5, 5))
         pause(randint(1, 6) * 500)
+    }
+    if (lifeAdder * 200 <= info.score()) {
+        lifeAdder += 1
+        info.changeLifeBy(2)
     }
 })
