@@ -77,6 +77,7 @@ forever(function () {
         asteroid = sprites.create(rocks._pickRandom(), SpriteKind.asteroid)
         asteroid.setPosition(160, randint(12, 95))
         asteroid.setFlag(SpriteFlag.DestroyOnWall, true)
+        asteroid.setFlag(SpriteFlag.AutoDestroy, true)
         asteroid.setVelocity(randint(-10, -50), randint(-5, 5))
         pause(randint(1, 6) * 500)
     }
@@ -86,6 +87,7 @@ forever(function () {
         container = sprites.create(cargo._pickRandom(), SpriteKind.cont)
         container.setPosition(160, randint(12, 95))
         container.setFlag(SpriteFlag.DestroyOnWall, true)
+        container.setFlag(SpriteFlag.AutoDestroy, true)
         container.setVelocity(randint(-10, -50), randint(-5, 5))
         pause(randint(1, 6) * 500)
     }
