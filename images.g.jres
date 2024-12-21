@@ -64,6 +64,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "laser"
     },
+    "image14": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgZmZmZmYAAGBvZmZmbwAAYG9maGZvAABgb/b/Zm8AAGBv391vbwAAYP/f3f9vAABgb9/db28AAGBv9v9mbwAAYG9mZmZvAABgb2ZmZm8AAGBmZmZmZgAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "TieFighter"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

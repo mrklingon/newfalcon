@@ -29,6 +29,11 @@ function StartFlight () {
     controller.moveSprite(MF)
     MF.setStayInScreen(true)
 }
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprites.destroy(sprite)
+    sprites.destroy(otherSprite, effects.fire, 500)
+    info.changeScoreBy(50)
+})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.asteroid, function (sprite, otherSprite) {
     sprites.destroy(sprite)
     sprites.destroy(otherSprite, effects.fire, 500)
@@ -38,6 +43,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.cont, function (sprite, otherSpr
     sprites.destroy(otherSprite, effects.rings, 100)
     info.changeScoreBy(randint(5, 20))
 })
+let Tie: Sprite = null
 let container: Sprite = null
 let asteroid: Sprite = null
 let MF: Sprite = null
@@ -45,6 +51,7 @@ let blast: Sprite = null
 StartFlight()
 game.splash("Pilot the Millenium Falcon", "Collect cargo, destroy asteroids!")
 let lifeAdder = 1
+let Ties = 0
 info.setLife(3)
 let rocks = [
 assets.image`rock0`,
@@ -76,6 +83,10 @@ forever(function () {
         pause(randint(1, 6) * 500)
     }
     if (lifeAdder * 200 <= info.score()) {
+        Tie = sprites.create(assets.image`TieFighter`, SpriteKind.Enemy)
+        Tie.setPosition(randint(120, 140), randint(20, 100))
+        Tie.setVelocity(0, randint(20, 40))
+        Tie.setBounceOnWall(true)
         lifeAdder += 1
         info.changeLifeBy(2)
     }
