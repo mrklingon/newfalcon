@@ -30,7 +30,8 @@ function StartFlight () {
     MF.setStayInScreen(true)
 }
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    sprites.destroy(sprite)
+    music.play(music.melodyPlayable(music.knock), music.PlaybackMode.InBackground)
+    sprites.destroy(sprite, effects.fire, 500)
     sprites.destroy(otherSprite, effects.fire, 500)
     info.changeScoreBy(50)
 })
