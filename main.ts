@@ -44,6 +44,12 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.cont, function (sprite, otherSpr
     sprites.destroy(otherSprite, effects.rings, 100)
     info.changeScoreBy(randint(5, 20))
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprites.destroy(otherSprite, effects.fire, 500)
+    scene.cameraShake(4, 500)
+    music.play(music.melodyPlayable(music.knock), music.PlaybackMode.UntilDone)
+    info.changeLifeBy(-1)
+})
 let Tie: Sprite = null
 let container: Sprite = null
 let asteroid: Sprite = null
