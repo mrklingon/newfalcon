@@ -2,6 +2,7 @@ namespace SpriteKind {
     export const bldg = SpriteKind.create()
     export const asteroid = SpriteKind.create()
     export const cont = SpriteKind.create()
+    export const eblast = SpriteKind.create()
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
@@ -29,6 +30,13 @@ function StartFlight () {
     controller.moveSprite(MF)
     MF.setStayInScreen(true)
 }
+function launchTie (newTie: Sprite) {
+    for (let index = 0; index < randint(3, 5); index++) {
+        pause(500 * randint(3, 5))
+        nblast = sprites.createProjectileFromSprite(assets.image`laser`, newTie, -50, 0)
+        nblast.setFlag(SpriteFlag.AutoDestroy, true)
+    }
+}
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     music.play(music.melodyPlayable(music.knock), music.PlaybackMode.InBackground)
     sprites.destroy(sprite, effects.fire, 500)
@@ -53,6 +61,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
 let Tie: Sprite = null
 let container: Sprite = null
 let asteroid: Sprite = null
+let nblast: Sprite = null
 let MF: Sprite = null
 let blast: Sprite = null
 StartFlight()
@@ -96,6 +105,7 @@ forever(function () {
         Tie.setPosition(randint(120, 140), randint(20, 100))
         Tie.setVelocity(0, randint(20, 40))
         Tie.setBounceOnWall(true)
+        launchTie(Tie)
         lifeAdder += 1
         info.changeLifeBy(2)
     }
