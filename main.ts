@@ -31,12 +31,20 @@ function StartFlight () {
     MF.setStayInScreen(true)
 }
 function launchTie (newTie: Sprite) {
-    for (let index = 0; index < randint(3, 5); index++) {
+    for (let index = 0; index < randint(1, 3); index++) {
         pause(500 * randint(3, 5))
-        nblast = sprites.createProjectileFromSprite(assets.image`laser`, newTie, -50, 0)
+        nblast = sprites.create(assets.image`laser`, SpriteKind.eblast)
+        nblast.setPosition(newTie.x, newTie.y)
+        nblast.setVelocity(-50, 0)
         nblast.setFlag(SpriteFlag.AutoDestroy, true)
     }
 }
+sprites.onOverlap(SpriteKind.eblast, SpriteKind.Player, function (sprite, otherSprite) {
+    music.play(music.melodyPlayable(music.knock), music.PlaybackMode.InBackground)
+    sprites.destroy(sprite, effects.fire, 500)
+    info.changeLifeBy(-1)
+    scene.cameraShake(4, 500)
+})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     music.play(music.melodyPlayable(music.knock), music.PlaybackMode.InBackground)
     sprites.destroy(sprite, effects.fire, 500)
